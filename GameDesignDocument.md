@@ -137,104 +137,107 @@ Adventurer's Guild is a strategic management game where players take on the role
 
 ## UI Conceptualization
 
-### 1. Main UI Layout Structure
-```
-+------------------------------------------+
-|  Primary Header                          |
-|  +--------------------------------------+|
-|  | Logo | Time | Gold: 1000 | Wood: 500 ||
-|  |      |      | Stone: 300 | Iron: 200 ||
-|  |      |      | Crystals:50| Rep: 75   ||
-|  +--------------------------------------+|
-|                                          |
-|  +------------------+  +---------------+ |
-|  | Main Panel       |  | Secondary     | |
-|  | +--------------+ |  | Panel         | |
-|  | | [Guild][Map] | |  | +-----------+ | |
-|  | +--------------+ |  | | [Details] | | |
-|  |                  |  | | [Adventur]| | |
-|  | Guild View       |  | | [Quests]  | | |
-|  | or Map View      |  | +-----------+ | |
-|  |                  |  |               | |
-|  |                  |  | Details:      | |
-|  |                  |  | - Building    | |
-|  |                  |  | - Node        | |
-|  |                  |  | - Party       | |
-|  |                  |  |               | |
-|  |                  |  | OR            | |
-|  |                  |  |               | |
-|  |                  |  | Adventurers:  | |
-|  |                  |  | - List with   | |
-|  |                  |  |   icons       | |
-|  |                  |  |               | |
-|  |                  |  | OR            | |
-|  |                  |  |               | |
-|  |                  |  | Quests:       | |
-|  |                  |  | - Active      | |
-|  |                  |  | - Pending     | |
-|  |                  |  | - Completed   | |
-|  +------------------+  +---------------+ |
-|                                          |
-|  +--------------------------------------+|
-|  | Footer                               ||
-|  | [Notifications]                      ||
-|  +--------------------------------------+|
-+------------------------------------------+
-```
+![Overall UI Layout](UI_Layout/UI_Layout.png)
+*Overall UI layout structure*
 
-### 2. Panel Descriptions and Interactions
+### 1. Overall UI Structure
 
-#### Main Panel (Left Side)
-- Contains Guild and Map tabs
-- Guild View: Shows buildings at the base
-- Map View: Shows nodes and parties on quests
-- Expands to full width when secondary panel is collapsed
-- Interaction: 
-  - Click buildings in Guild view
-  - Click nodes/parties in Map view
-  - Toggle secondary panel visibility
+- **Header Bar:**  
+  - Displays the guild name, current day and time, and all tracked resources (Gold, Wood, Iron, Magic Crystals).
+- **Main Panel:**  
+  - Contains two primary tabs: **Guild** and **Map**.
+  - The content of this panel changes based on the selected tab.
+- **Secondary Panel (Right):**  
+  - Contains three tabs: **Details**, **Quests**, and **Adventurers**.
+  - Can be shown or hidden using a toggle button. When hidden, the main panel expands to fill the space.
+- **Notifications:**  
+  - Displayed in the bottom left corner, providing alerts and events to the player.
 
-#### Secondary Panel (Right Side)
-- Three tabs: Details, Adventurers, Quests
-- Details Tab: Shows information about last clicked object
-- Adventurers Tab: List view with minimal details (icon, name, class, level, status)
-- Quests Tab: Organized by status (Active/Pending/Completed)
-- Collapsible panel
-- Interaction:
-  - Switch between tabs
-  - Click collapse button to hide/show
-  - Click adventurer for more details
-  - Click quest for more details
+---
 
-### 3. UI State Management
+### 2. Main Panel Use Cases
 
-#### Main Panel States
-- Guild: Shows guild buildings and facilities
-- Map: Shows nodes and parties on quests
+#### a. Guild Tab
+- **Default View:**  
+  - Shows a spatial layout of guild buildings and adventurers.
+- **Selecting a Building:**  
+  - Highlights the building.
+  - The **Details** tab in the secondary panel displays information about the building (purpose, status, and, for the guildhall, comprehensive guild info).
 
-#### Secondary Panel States
-- Details: Shows information about selected object
-- Adventurers: Shows list of guild members
-- Quests: Shows quest list by status
-- Hidden: Panel is collapsed
+  ![Building Details Example](UI_Layout/UI_Layout%20-%20Details%20-%20Building.png)
+  *Details panel showing a selected building (Guildhall) in the Guild view*
 
-### 4. Key UI Interactions
+- **Selecting an Adventurer:**  
+  - Highlights the adventurer.
+  - The **Details** tab displays adventurer information (name, class, level, status, and possibly stats like kills or quests completed).
 
-#### Building Interaction Flow
-1. Click building in Guild view
-2. Secondary panel opens (if closed)
-3. Building details show in Details tab
-4. Manage building from details panel
+  ![Adventurer Details Example](UI_Layout/UI_Layout%20-%20Details%20-%20Adventurer.png)
+  *Details panel showing a selected adventurer in the Guild view*
 
-#### Map Interaction Flow
-1. Click Map tab in main panel
-2. Map view appears
-3. Click node or party
-4. Details show in secondary panel
-5. Manage node/party from details
+#### b. Map Tab
+- **Default View:**  
+  - Shows a node-based map representing locations and connections.
+- **Selecting a Node:**  
+  - Highlights the node.
+  - The **Details** tab displays basic information about the location.
 
-#### Panel Management Flow
-1. Click collapse button on secondary panel
-2. Secondary panel slides away
-3. Main panel expands to full width
-4. Click again to restore secondary panel 
+  ![Node Details Example](UI_Layout/UI_Layout%20-%20Details%20-%20Node.png)
+  *Details panel showing a selected node in the Map view*
+
+- **Selecting a Party:**  
+  - Highlights the party (represented by a diamond) on a node.
+  - The **Details** tab displays party information (active quest, current status, list of adventurers, held items, and action buttons for resolving events or abandoning quests).
+
+  ![Party Details Example](UI_Layout/UI_Layout%20-%20Details%20-%20Party.png)
+  *Details panel showing a selected party in the Map view*
+
+- **Quest Location Marker:**  
+  - Triangles indicate quest locations on the map.
+
+---
+
+### 3. Secondary Panel Use Cases
+
+- **Details Tab:**  
+  - Context-sensitive; shows information about the last selected object (building, adventurer, node, or party).
+- **Quests Tab:**  
+  - Lists all quests, divided into:
+    - **Active Quests:** With assigned parties; double-clicking may switch to party details.
+
+      ![Active Quests Example](UI_Layout/UI_Layout%20-%20Quests%20-%20QuestActive.png)
+      *Quests tab showing active quests and their assigned parties*
+
+    - **Pending Quests:** Awaiting party assignment, with a button to assign a party and start the quest.
+
+      ![Pending Quests Example](UI_Layout/UI_Layout%20-%20Quests%20-%20QuestPending.png)
+      *Quests tab showing pending quests and assignment options*
+
+    - **Completed Quests:** (Implied as a possible section.)
+- **Adventurers Tab:**  
+  - Lists all guild members with minimal details (icon, name, class, level, status).
+
+---
+
+### 4. Panel Behavior and Interaction Flow
+
+- The secondary panel can be shown or hidden with a toggle button. When hidden, the main panel expands to use the full width of the screen.
+- **Guild Tab Flow:**  
+  - Click buildings or adventurers to view their details in the secondary panel.
+- **Map Tab Flow:**  
+  - Click nodes, parties, or quest markers to view details or take actions in the secondary panel.
+- **Quests Tab Flow:**  
+  - Manage quest assignments and view quest status.
+- **Adventurers Tab Flow:**  
+  - Quick overview of all guild members.
+- **Notifications:**  
+  - Always visible in the bottom left; clicking may open more detailed information or actions.
+
+---
+
+### 5. Visual Cues and Usability
+
+- The currently selected/focused element is highlighted (yellow border or fill).
+- The active tab in both the main and secondary panels is visually distinct.
+- The UI is designed for clarity, with a strong separation between navigation (main panel) and context-sensitive information/actions (secondary panel).
+
+**This documentation formalizes the intended UI behavior and layout as illustrated in your images, ensuring a clear reference for both design and implementation.** 
