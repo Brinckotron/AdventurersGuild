@@ -299,8 +299,8 @@ Adventurer's Guild is a strategic management game where players take on the role
 #### Critical Notification Process
 1. Game pauses
 2. Main icon flashes
-3. Popup appears automatically
-4. Player must resolve before continuing
+3. Player must resolve before continuing
+4. Popup Appears on player click if appropriate
 5. Notification moves to history
 
 #### Standard Notification Process
@@ -348,5 +348,3 @@ Adventurer's Guild is a strategic management game where players take on the role
 2. Temporary dismissal of critical notifications
 3. Handling obsolete notifications
 4. Notification persistence through save/load 
-
-Bonne fête Kevin 
