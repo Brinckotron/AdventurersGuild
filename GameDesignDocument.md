@@ -241,3 +241,136 @@ Adventurer's Guild is a strategic management game where players take on the role
 - The UI is designed for clarity, with a strong separation between navigation (main panel) and context-sensitive information/actions (secondary panel).
 
 **This documentation formalizes the intended UI behavior and layout as illustrated in your images, ensuring a clear reference for both design and implementation.** 
+
+## Notifications System Conceptualization
+
+### 1. Event Types and Behaviors
+
+#### Map Events
+- **Critical Events (Pause Game Flow)**
+  - Party reached node (resolve node content)
+  - Party completed node (player chooses next node to travel to)
+  - Quest Completed
+- **Standard Events**
+  - New location discovered
+  - Adventurer Died
+
+#### Guild Events
+- **Critical Events (Pause Game Flow)**
+  - NPC visits (Traveling Merchant, possible client with quest, possible new recruit)
+  - Disease spreads
+  - Fire breaks out
+- **Standard Events**
+  - Building construction completed
+  - Building upgrade completed
+  - New quest received
+  - Adventurer training completed
+  - Item crafted
+  - Adventurer recovered (from tired, injured or diseased state)
+
+### 2. UI Components
+
+#### Visual Elements
+- **Main Notification Icon (Bottom Left)**
+  - Flashes when new notifications arrive
+  - Critical notifications trigger immediate popup
+  - Clickable to resolve notifications
+- **Notification List**
+  - Scrollable list of current notifications
+  - Newer notifications appear at the top
+  - Unresolved notifications are clickable
+  - Resolved notifications remain visible but inactive
+- **History View**
+  - Access to all past notifications
+  - Maintains record of resolved notifications
+
+#### Visual States
+- **Critical Notifications**
+  - Flashing icon
+  - Popup window
+  - Game paused until resolved
+- **Standard Notifications**
+  - Faintly glowing text
+  - No game interruption
+  - Can be resolved at player's convenience
+
+### 3. Interaction Flow
+
+#### Critical Notification Process
+1. Game pauses
+2. Main icon flashes
+3. Popup appears automatically
+4. Player must resolve before continuing
+5. Notification moves to history
+
+#### Standard Notification Process
+1. Added to notification list
+2. Gentle glow animation
+3. Audio cue plays
+4. Player can resolve at any time
+5. Moves to history when resolved
+
+#### Resolution Behavior
+- Clicking unresolved notification:
+  1. Opens relevant main panel tab
+  2. Selects appropriate object
+  3. Opens relevant secondary panel tab
+  4. Shows popup if required
+  - **Examples:**
+    - Party reached node: Opens map tab, selects party, opens details tab, shows node resolution popup
+    - Item crafted: Opens guild tab, selects guildhall, opens details tab, shows storage popup
+
+### 4. Technical Structure
+
+```typescript
+enum NotificationType {
+    MAP_EVENT,
+    GUILD_EVENT,
+    SYSTEM_EVENT
+}
+
+enum NotificationUrgency {
+    CRITICAL,    // Requires immediate attention, pauses game
+    STANDARD     // Informational, no pause required
+}
+
+interface NotificationData {
+    id: string;
+    type: NotificationType;
+    urgency: NotificationUrgency;
+    title: string;
+    description: string;
+    timestamp: DateTime;
+    isResolved: boolean;
+    mainPanelTab?: TabType;
+    secondaryPanelTab?: TabType;
+    targetObject?: GameObject;
+    popupWindow?: PopupType;
+    associatedData?: any;
+}
+```
+
+### 5. Queue Management
+
+- **Critical Queue**
+  - Processes one notification at a time
+  - Must be resolved to continue game
+  - Maintains order of critical events
+- **Standard Queue**
+  - Multiple notifications can exist simultaneously
+  - No resolution order enforced
+  - Automatically sorted by timestamp
+
+### 6. Future Considerations
+
+#### Planned for Later Implementation
+- Different sounds for different notification types
+- Notification settings customization
+- Notification filtering options
+- Accessibility features
+
+#### Edge Cases to Address
+1. Multiple critical notifications queuing up
+2. Temporary dismissal of critical notifications
+3. Handling obsolete notifications
+4. Notification persistence through save/load 
