@@ -344,7 +344,58 @@ Adventurer's Guild is a strategic management game where players take on the role
 - Accessibility features
 
 #### Edge Cases to Address
-1. Multiple critical notifications queuing up
-2. Temporary dismissal of critical notifications
-3. Handling obsolete notifications
-4. Notification persistence through save/load 
+1. **Multiple Critical Notifications**
+   - Critical notifications must be resolved in order of occurrence
+   - No dismissal or deferral allowed
+   - System will queue critical notifications and process them one at a time using a priority system and FIFO
+   - Game remains paused until all critical notifications are resolved
+   - Visual indicator shows number of pending critical notifications
+   - Priority system for simultaneous critical events:
+     - Emergency events (fire, disease) have highest priority
+     - Quest-related events have medium priority
+     - NPC visits have lowest priority
+
+2. **Obsolete Notifications**
+   - System includes failsafe for handling obsolete notifications
+   - If notification references become null or irrelevant:
+     - Notification remains in list
+     - Clicking notification marks it as resolved without any action
+     - Prevents errors and crashes
+     - Maintains system simplicity
+
+3. **Save/Load Functionality**
+   - Unresolved notifications persist through save/load
+   - Save process includes validation of notification references
+   - Obsolete notifications are automatically resolved during load
+   - Critical notifications maintain their priority in the queue after load
+
+4. **Notification Chain Reactions**
+   - New critical notifications triggered during resolution of another notification
+   - New notifications are added to the queue respecting priority placement
+   - Current notification resolution continues
+   - New notifications will be processed in order after current resolution
+
+5. **Notification List Management**
+   - Maximum of 30 notifications in the active list
+   - Notifications pushed out of the active list are automatically resolved
+   - All notifications are added to the guild journal/history
+   - History only maintains notification text, not interactive elements
+
+6. **UI State Conflicts**
+   - Critical notifications have priority over all UI interactions
+   - Current UI state is interrupted when critical notification arrives
+   - Player must resolve critical notification before returning to previous UI state
+   - Previous UI state is restored after notification resolution
+
+7. **Resource-Related Notifications**
+   - Resource notifications (e.g., "Low on gold") are informational only
+   - No specific resolution required
+   - Clicking simply acknowledges the notification
+   - Auto-resolved if the condition no longer exists
+
+8. **Multi-Event Notifications**
+   - Each notification must reference a specific game element by name
+   - Example: "Item crafted: Potion of Healing"
+   - Example: "Building Completed: Training Grounds"
+   - Similar events generate separate notifications for clarity
+   - No grouping of similar notifications 
