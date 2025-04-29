@@ -322,33 +322,7 @@ Adventurer's Guild is a strategic management game where players take on the role
 
 ### 4. Technical Structure
 
-```typescript
-enum NotificationType {
-    MAP_EVENT,
-    GUILD_EVENT,
-    SYSTEM_EVENT
-}
 
-enum NotificationUrgency {
-    CRITICAL,    // Requires immediate attention, pauses game
-    STANDARD     // Informational, no pause required
-}
-
-interface NotificationData {
-    id: string;
-    type: NotificationType;
-    urgency: NotificationUrgency;
-    title: string;
-    description: string;
-    timestamp: DateTime;
-    isResolved: boolean;
-    mainPanelTab?: TabType;
-    secondaryPanelTab?: TabType;
-    targetObject?: GameObject;
-    popupWindow?: PopupType;
-    associatedData?: any;
-}
-```
 
 ### 5. Queue Management
 
@@ -374,3 +348,5 @@ interface NotificationData {
 2. Temporary dismissal of critical notifications
 3. Handling obsolete notifications
 4. Notification persistence through save/load 
+
+Bonne fête Kevin 
