@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
+    //GameManager Reference
+    private GameManager gameManager;
+    
     private UIDocument uiDocument;
     private VisualElement root;
     
@@ -31,8 +34,9 @@ public class UIManager : MonoBehaviour
     // Notifications
     private VisualElement notificationsContainer;
 
-    private void Awake()
+    protected override void OnAwake()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
         
@@ -48,8 +52,9 @@ public class UIManager : MonoBehaviour
         // Set up event handlers
         SetupEventHandlers();
         
-        //Set Guild Tab Active
+        //Set Active Tabs
         SwitchMainTab("guild");
+        SwitchSecondaryTab("adventurers");
     }
     
     
@@ -119,6 +124,7 @@ public class UIManager : MonoBehaviour
                 mainContent.RemoveFromClassList("transparent");
                 break;
         }
+        gameManager.ActiveMainTab = tabName;
     }
 
     private void SwitchSecondaryTab(string tabName)
