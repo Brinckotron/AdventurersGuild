@@ -1,21 +1,24 @@
+UI: ![Combat Screen UI](UI_Layout/UI_Layout%20-%20Combat_Screen.png)
+
 **Combat complétement automatique**
 pour commencer oui
 
-**Choisi la position des aventuriers  ? (Avant le départ ou avant combat) Influence qui prend plus de dmg ou potentiel deal plus de dmg?**
-pas sur, mais à explorer
+**Choix Pré-fight pour le player agency?**
+Choisir la stance de chaque personnage (Vanguard, Support, Assaillant, Defensive, Balanced)
+choisir quelle abilité est active sur chaque personnage
 
 **Item a équipper. Bost stat? Donne attribut/abilité unique ? Mélange des 2 ? Donne malus en échange de bon bonus?**
 probablement toutes sortes d'items. 
 Stat Boost
 One time Healing
-One Time dmg
+One Time dmg boost
 Protection
 Extra dmg
 ...
 
 **4 classe avec chacun des abilité propres a leur classe. Gagne nouvelle abilité a chaque lvl? Gagne en stat?**
-gagne stat (+1 main stat, +1 random)
-gagne abilité spéciale seulement à certains levels (5, 10, 15, 20?)
+gagne stat (+1 main stat, +1 stat au choix, +1 stat random (toutes les stats doivent avoir un impact))
+gagne abilité spéciale seulement à certains levels
 
 **Comment le dmg est calculer recu ou donner ?**
 I guess un roll random comme un dé + la stat associée? soustrait d'une quelconque protection? (item, special ability, autre bonus)
@@ -28,16 +31,21 @@ pense pas. faut que ce soit un risque, et le reward si ca marche est d'avoir plu
 forcé de retourner a la base.
 
 **Stat pour aventurier ? Const,Str,Agi,Int?**
-End, Str, Agi, Mag, Wil
+End (HP) , Str (Dmg Reduction), Agi(Dodge), Mag (special damage), Wil (resistance to effects)
 
 **Comment la target de l'attaque est choisie?**
-completement random + modificateurs possibles avec special abilities? (rogue target les blessés?)
+random basé sur un Weight system influencé par les stances et autres détails (items, abilities, classe etc)
 
-**Est ce qu'il y a un cout a envoyer des aventuriers ? peut etre cout flat pour chaque aventurier (ration, equipement, etc?)**
-si oui, ca commence à complexifier les trucs pas mal, mais pas nécéssairement une mauvaise idée. Gestion de ressources
+**Ressources**
+Reputation (progression measure) -- gained on quest completion, Trophies, and special events
+Gold (all purpose) -- gained on adventure nodes and special events and quest rewards
+Rations (send adventurers, special events) -- income from buildings, maybe special nodes, special events
+building materials (buildings) -- income from special nodes, quest rewards, special events
+Iron (items, special buildings, special events) -- income from special nodes (later), gained on adventure nodes and special events and quest rewards
+Magic Crystals (items, special buildings, special events) -- income from special nodes (later), gained on adventure nodes and special events and quest rewards
 
 **Est ce que chaque classe a des abilités contre certain pièges/terrain? (Rogue trap, Gerrier passage bloqué, etc)**
-peut etre dans certains types de nodes, mais ca aussi ca complexifie les choses. (peut etre des nodes Donjon, dans lesquelles des bonus secrets sont accessible avec certaines classes)
+Dungeon nodes avec "skill check", non-combat encounters
 
 **Est ce qu'il y a des possibilité de "team-up" si classe X et classe Y sont dans le mm party, chance de coup spéciaux a leur tour.**
 pourquoi pas, mais complexe
