@@ -1,0 +1,136 @@
+.root {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,0);
+    
+}
+
+/* Header Bar */
+.header-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 2%;
+    background-color: rgb(20, 20, 20);
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(50, 50, 50);
+}
+
+.guild-name {
+    font-size: 28px;
+    color: rgb(255, 215, 0);
+    margin-right: 2%;
+   
+}
+
+.time-display {
+    font-size: 20px;
+    color: rgb(220, 220, 220);
+}
+
+.resources {
+    flex-direction: row;
+    top: 2%;
+}
+
+.resource {
+    font-size: 18px;
+    color: rgb(220, 220, 220);
+}
+
+/* Main Content Area */
+.main-content {
+    flex-direction: row;
+    flex-grow: 1;
+   
+    background-color: rgba(0,0,0,0);
+    picking-mode: ignore;
+}
+
+/* Main Panel */
+.main-panel {
+    flex-grow: 1;
+    background-color: rgb(40, 40, 40);
+    
+}
+
+.main-tabs {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: auto;
+    padding: 8px 4px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 0px 0px 8px 8px;
+}
+
+.tab-button {
+    padding: 16px 20px;
+    margin-right: 16px;
+    background-color: rgb(50, 50, 50);
+    border-radius: 6px;
+    color: rgb(220, 220, 220);
+    font-size: 18px;
+    min-width: 120px;
+    min-height: 48px;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.tab-button:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.tab-button:active {
+    background-color: rgb(90, 90, 90);
+}
+
+.main-panel-content {
+    flex-grow: 1;
+    padding: 2%;
+}
+
+/* Secondary Panel */
+.secondary-panel {
+    width: 32%;
+    background-color: rgb(40, 40, 40);
+    border-left-width: 2px;
+    border-left-color: black;
+}
+
+.secondary-tabs {
+    flex-direction: row;
+    padding: 8px 4px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 0 0 8px 8px;
+}
+
+.secondary-panel-content {
+    flex-grow: 1;
+    padding: 2%;
+}
+
+/* Notifications */
+.notifications {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    flex-direction: column;
+    
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+.selected {
+    background-color: rgb(100, 100, 100);
+    border-color: rgb(255, 215, 0);
+    border-width: 2px;
+}
+
+.transparent {
+    background-color: rgba(0,0,0,0);
+    picking-mode: ignore;
+} 

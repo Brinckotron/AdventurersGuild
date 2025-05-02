@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DwarfWarrior_0: 281325070217196261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

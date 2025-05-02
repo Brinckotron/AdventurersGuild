@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TieflingWarrior_0: -3941821974862926194
+      TieflingWarrior_1: 43376015392142988
+      TieflingWarrior_2: -8492363685844835169
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

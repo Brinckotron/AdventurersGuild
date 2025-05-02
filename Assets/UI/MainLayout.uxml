@@ -1,0 +1,33 @@
+<UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" schemaLocation="UnityEngine.UIElements ../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainLayout.uss?fileID=7433441132597879392&amp;guid=2d5e75314c75d614d8febc7c6a4e41b7&amp;type=3#MainLayout" />
+    <VisualElement name="root" class="root">
+        <VisualElement name="header-bar" class="header-bar">
+            <Label name="guild-name" text="Adventurer&apos;s Guild" class="guild-name" />
+            <Label name="time-display" text="Day 1, 08:00" class="time-display" />
+            <VisualElement name="resources" class="resources">
+                <Label name="gold" text="Gold: 1000" class="resource" />
+                <Label name="wood" text="Wood: 500" class="resource" />
+                <Label name="iron" text="Iron: 200" class="resource" />
+                <Label name="magic-crystals" text="Magic Crystals: 50" class="resource" />
+            </VisualElement>
+        </VisualElement>
+        <VisualElement name="main-content" class="main-content">
+            <VisualElement name="main-panel" class="main-panel">
+                <VisualElement name="main-tabs" class="main-tabs">
+                    <Button name="guild-tab" text="Guild" class="tab-button" />
+                    <Button name="map-tab" text="Map" class="tab-button" />
+                </VisualElement>
+                <VisualElement name="main-panel-content" class="main-panel-content" />
+            </VisualElement>
+            <VisualElement name="secondary-panel" class="secondary-panel">
+                <VisualElement name="secondary-tabs" class="secondary-tabs">
+                    <Button name="details-tab" text="Details" class="tab-button" />
+                    <Button name="quests-tab" text="Quests" class="tab-button" />
+                    <Button name="adventurers-tab" text="Adventurers" class="tab-button" />
+                </VisualElement>
+                <VisualElement name="secondary-panel-content" class="secondary-panel-content" />
+            </VisualElement>
+        </VisualElement>
+        <VisualElement name="notifications" class="notifications" />
+    </VisualElement>
+</UXML>

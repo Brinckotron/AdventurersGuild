@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HumanWarrior_0: -1755407613584059112
+      HumanWarrior_1: 5648334925408053195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

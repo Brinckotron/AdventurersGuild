@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DragonbornWarrior_0: 494960162596059835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
