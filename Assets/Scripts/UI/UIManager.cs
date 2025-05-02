@@ -47,6 +47,9 @@ public class UIManager : MonoBehaviour
         
         // Set up event handlers
         SetupEventHandlers();
+        
+        //Set Guild Tab Active
+        SwitchMainTab("guild");
     }
     
     
