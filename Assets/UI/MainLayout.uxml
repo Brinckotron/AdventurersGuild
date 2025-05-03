@@ -12,12 +12,15 @@
             </VisualElement>
         </VisualElement>
         <VisualElement name="main-content" class="main-content">
-            <VisualElement name="main-panel" class="main-panel">
-                <VisualElement name="main-tabs" class="main-tabs">
-                    <Button name="guild-tab" text="Guild" class="tab-button" />
-                    <Button name="map-tab" text="Map" class="tab-button" />
+            <VisualElement name="main-left-section" style="flex-direction: column; flex-grow: 1;">
+                <VisualElement name="main-panel" class="main-panel">
+                    <VisualElement name="main-tabs" class="main-tabs">
+                        <Button name="guild-tab" text="Guild" class="tab-button" />
+                        <Button name="map-tab" text="Map" class="tab-button" />
+                    </VisualElement>
+                    <VisualElement name="main-panel-content" class="main-panel-content" />
                 </VisualElement>
-                <VisualElement name="main-panel-content" class="main-panel-content" />
+                <VisualElement name="notification-panel" class="notification-panel" />
             </VisualElement>
             <VisualElement name="secondary-panel" class="secondary-panel">
                 <VisualElement name="secondary-tabs" class="secondary-tabs">
@@ -28,6 +31,5 @@
                 <VisualElement name="secondary-panel-content" class="secondary-panel-content" />
             </VisualElement>
         </VisualElement>
-        <VisualElement name="notifications" class="notifications" />
     </VisualElement>
 </UXML>

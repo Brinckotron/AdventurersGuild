@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -31,8 +32,14 @@ public class UIManager : Singleton<UIManager>
     private Button adventurersTabButton;
     private VisualElement secondaryPanelContent;
     
+    // Adventurers panel elements
+    private ScrollView adventurersList;
+    
     // Notifications
     private VisualElement notificationsContainer;
+    
+    // Card factory
+    private AdventurerCardFactory cardFactory;
 
     protected override void OnAwake()
     {
@@ -40,7 +47,8 @@ public class UIManager : Singleton<UIManager>
         uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
         
-        
+        // Initialize card factory
+        cardFactory = new AdventurerCardFactory(this);
         
         // Get references to UI elements
         GetHeaderElements();
@@ -48,6 +56,9 @@ public class UIManager : Singleton<UIManager>
         GetSecondaryPanelElements();
         GetNotificationElements();
         mainContent = root.Q<VisualElement>("main-content");
+        
+        // Create adventurers list container
+        CreateAdventurersListContainer();
         
         // Set up event handlers
         SetupEventHandlers();
@@ -57,8 +68,6 @@ public class UIManager : Singleton<UIManager>
         SwitchSecondaryTab("adventurers");
     }
     
-    
-
     private void GetHeaderElements()
     {
         guildNameLabel = root.Q<Label>("guild-name");
@@ -75,7 +84,6 @@ public class UIManager : Singleton<UIManager>
         guildTabButton = root.Q<Button>("guild-tab");
         mapTabButton = root.Q<Button>("map-tab");
         mainPanelContent = root.Q<VisualElement>("main-panel-content");
-        
     }
 
     private void GetSecondaryPanelElements()
@@ -90,6 +98,13 @@ public class UIManager : Singleton<UIManager>
     private void GetNotificationElements()
     {
         notificationsContainer = root.Q<VisualElement>("notifications");
+    }
+
+    private void CreateAdventurersListContainer()
+    {
+        adventurersList = new ScrollView();
+        adventurersList.name = "adventurers-list";
+        adventurersList.AddToClassList("adventurers-list");
     }
 
     private void SetupEventHandlers()
@@ -134,6 +149,9 @@ public class UIManager : Singleton<UIManager>
         questsTabButton.RemoveFromClassList("selected");
         adventurersTabButton.RemoveFromClassList("selected");
         
+        // Clear the content
+        secondaryPanelContent.Clear();
+        
         // Add selected class to clicked tab
         switch (tabName)
         {
@@ -147,26 +165,58 @@ public class UIManager : Singleton<UIManager>
                 break;
             case "adventurers":
                 adventurersTabButton.AddToClassList("selected");
-                // TODO: Load adventurers content
+                LoadAdventurersTab();
                 break;
         }
     }
 
-    public void ShowNotification(string message, NotificationType type = NotificationType.Info)
+    private void LoadAdventurersTab()
     {
-        var notification = new Label(message);
-        notification.AddToClassList("notification");
-        notification.AddToClassList(type.ToString().ToLower());
-        notificationsContainer.Add(notification);
+        // Clear existing content
+        adventurersList.Clear();
         
-        // Auto-remove notification after 5 seconds
-        StartCoroutine(RemoveNotificationAfterDelay(notification, 5f));
-    }
+        // Add the scroll view to the secondary panel content
+        secondaryPanelContent.Add(adventurersList);
 
-    private System.Collections.IEnumerator RemoveNotificationAfterDelay(VisualElement notification, float delay)
+        // Load adventurers from GameManager and create cards
+        List<Adventurer> adventurers = gameManager.GetAdventurers();
+        
+        if (adventurers != null && adventurers.Count > 0)
+        {
+            foreach (Adventurer adventurer in adventurers)
+            {
+                adventurersList.Add(cardFactory.CreateAdventurerCard(adventurer));
+            }
+        }
+        else
+        {
+            // Create a message if no adventurers are available
+            Label noAdventurersLabel = new Label("No adventurers available.");
+            noAdventurersLabel.AddToClassList("no-adventurers-message");
+            adventurersList.Add(noAdventurersLabel);
+        }
+    }
+    
+    // Method to show adventurer details - needs to be public for the card factory
+    public void ShowAdventurerDetails(int adventurerId)
     {
-        yield return new WaitForSeconds(delay);
-        notification.RemoveFromHierarchy();
+        // Switch to details tab and load details for this adventurer
+        detailsTabButton.AddToClassList("selected");
+        adventurersTabButton.RemoveFromClassList("selected");
+        
+        // Clear the content
+        secondaryPanelContent.Clear();
+        
+        // Get the adventurer from GameManager
+        Adventurer adventurer = gameManager.GetAdventurerById(adventurerId);
+        
+        if (adventurer != null)
+        {
+            // TODO: Implement detailed adventurer view here
+            // For now just display a message
+            Label detailsLabel = new Label($"Showing details for {adventurer.HeroName}");
+            secondaryPanelContent.Add(detailsLabel);
+        }
     }
 
     // Update UI with game data
@@ -187,12 +237,13 @@ public class UIManager : Singleton<UIManager>
         ironLabel.text = $"Iron: {iron}";
         magicCrystalsLabel.text = $"Magic Crystals: {magicCrystals}";
     }
+    
+    // Method to refresh the adventurers list if it's currently visible
+    public void RefreshAdventurersList()
+    {
+        if (adventurersTabButton.ClassListContains("selected"))
+        {
+            LoadAdventurersTab();
+        }
+    }
 }
-
-public enum NotificationType
-{
-    Info,
-    Warning,
-    Error,
-    Success
-} 

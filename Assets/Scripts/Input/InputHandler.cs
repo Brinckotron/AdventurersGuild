@@ -13,6 +13,7 @@ public class InputHandler : Singleton<InputHandler>
         mainCamera = Camera.main;
     }
 
+
     public void OnClick(InputAction.CallbackContext context)
     {
         if (!context.started) return;
@@ -20,9 +21,10 @@ public class InputHandler : Singleton<InputHandler>
         var rayHit = Physics2D.GetRayIntersection(mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (!rayHit.collider) return;
 
-        if (Mouse.current.position.ReadValue().x < Screen.width * 0.68f &&
-            Mouse.current.position.ReadValue().y < Screen.height * 0.85f
-            && gameManager.ActiveMainTab == "guild")
+        if (Mouse.current.position.ReadValue().x < Screen.width * 0.75f &&
+            Mouse.current.position.ReadValue().y < Screen.height * 0.861f &&
+            Mouse.current.position.ReadValue().y > Screen.height * 0.176f &&
+            gameManager.ActiveMainTab == "guild")
         {
             Debug.Log("Lol");
         }
