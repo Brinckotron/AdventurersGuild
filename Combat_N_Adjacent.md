@@ -31,7 +31,7 @@ pense pas. faut que ce soit un risque, et le reward si ca marche est d'avoir plu
 forcé de retourner a la base.
 
 **Stat pour aventurier ? Const,Str,Agi,Int?**
-End (HP) , Str (Dmg Reduction), Agi(Dodge), Mag (special damage), Wil (resistance to effects)
+End (HP) , Str (Dmg Reduction), Agi(Dodge), Mag , Wil (resistance to effects)
 
 **Comment la target de l'attaque est choisie?**
 random basé sur un Weight system influencé par les stances et autres détails (items, abilities, classe etc)
