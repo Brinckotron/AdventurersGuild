@@ -1,0 +1,14 @@
+<UXML xmlns="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/PauseMenu.uss?fileID=7433441132597879392&amp;guid=48e7c2bb73d4cf747a29a868447eb954&amp;type=3#PauseMenu" />
+    <VisualElement class="pause-menu-root">
+        <Label text="PAUSE MENU" class="pause-title" />
+        <Label text="No BG pour le pause Menu" class="pause-desc" />
+        <VisualElement class="pause-tabs">
+            <Button name="settings-tab" text="Setting" class="pause-tab selected" />
+            <Button name="tutorial-tab" text="Tuto/Manual" class="pause-tab" />
+            <Button name="saveload-tab" text="Save/Load" class="pause-tab" />
+            <Button name="quit-tab" text="Quit" class="pause-tab" />
+        </VisualElement>
+        <VisualElement name="pause-content" class="pause-content" />
+    </VisualElement>
+</UXML>

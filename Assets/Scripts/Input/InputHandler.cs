@@ -8,6 +8,7 @@ public class InputHandler : Singleton<InputHandler>
     private Camera mainCamera;
     private TimeManager timeManager;
     private bool gamePaused;
+    [SerializeField] private GameObject pauseMenu;
 
     protected override void OnAwake()
     {
@@ -41,11 +42,13 @@ public class InputHandler : Singleton<InputHandler>
         {
             gamePaused = true;
             timeManager.PauseTime();
+            pauseMenu.SetActive(gamePaused);
             Debug.Log("Pause Game");
         }
         else
         {
             gamePaused = false;
+            pauseMenu.SetActive(gamePaused);
             timeManager.ResumeTime();
             Debug.Log("Resume Game");
         }
