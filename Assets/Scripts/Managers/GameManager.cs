@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     //Managers References
     private UIManager uiManager;
     private InputHandler inputHandler;
+    private TimeManager timeManager;
     
     //GameState variables
     private string activeMainTab = "";
@@ -16,10 +17,6 @@ public class GameManager : Singleton<GameManager>
     private int wood = 500;
     private int iron = 200;
     private int magicCrystals = 50;
-    
-    // Game time tracking
-    private int currentDay = 1;
-    private int currentHour = 8;
     
     // List of adventurers in guild
     private List<Adventurer> adventurers = new List<Adventurer>();
@@ -40,6 +37,8 @@ public class GameManager : Singleton<GameManager>
     {
         // Create some test adventurers
         CreateTestAdventurers();
+        // Initialize TimeManager
+        timeManager = FindFirstObjectByType<TimeManager>();
         // Initialize InputHandler
         inputHandler = FindFirstObjectByType<InputHandler>();
         // Initialize UI
@@ -52,8 +51,9 @@ public class GameManager : Singleton<GameManager>
     {
         // Set up the initial UI state
         uiManager.UpdateGuildName("Adventurer's Guild");
-        uiManager.UpdateTimeDisplay($"Day {currentDay}, {currentHour:00}:00");
+        uiManager.UpdateTimeDisplay($"Day {timeManager.CurrentDay}, {timeManager.CurrentHour:00}:{timeManager.CurrentMinutes:00}");
         uiManager.UpdateResources(gold, wood, iron, magicCrystals);
+        uiManager.RefreshAdventurersList();
     }
     
     private void CreateTestAdventurers()
@@ -123,6 +123,18 @@ public class GameManager : Singleton<GameManager>
     public Adventurer GetAdventurerById(int id)
     {
         return adventurers.Find(a => a.ID == id);
+    }
+    
+    // Public Methods to be called from TimeManager
+
+    public void UpdateTime()
+    {
+        uiManager.UpdateTimeDisplay($"Day {timeManager.CurrentDay}, {timeManager.CurrentHour:00}:{timeManager.CurrentMinutes:00}");
+    }
+
+    public void UpdateTimeScale()
+    {
+        uiManager.UpdateTimeControlUI(timeManager.TimeScale);
     }
 }
     

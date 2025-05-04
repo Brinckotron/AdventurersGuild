@@ -3,7 +3,14 @@
     <VisualElement name="root" class="root">
         <VisualElement name="header-bar" class="header-bar">
             <Label name="guild-name" text="Adventurer&apos;s Guild" class="guild-name" />
-            <Label name="time-display" text="Day 1, 08:00" class="time-display" />
+            <VisualElement name="time-section" class="time-section">
+                <Label name="time-display" class="time-display" />
+                <VisualElement name="time-controls" class="time-controls">
+                    <Button name="pause-button" text="❚❚" tooltip="Pause" class="time-control-button" />
+                    <Button name="resume-button" text="▶" tooltip="Normal Speed (x1)" class="time-control-button active-time-control" />
+                    <Button name="fast-forward-button" text="▶▶" tooltip="Fast Forward (x5)" class="time-control-button" />
+                </VisualElement>
+            </VisualElement>
             <VisualElement name="resources" class="resources">
                 <Label name="gold" text="Gold: 1000" class="resource" />
                 <Label name="wood" text="Wood: 500" class="resource" />

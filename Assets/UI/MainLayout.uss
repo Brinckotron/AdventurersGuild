@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0,0);
-
 }
 
 /* Header Bar */
@@ -18,12 +17,57 @@
     font-size: 28px;
     color: rgb(255, 215, 0);
     margin-right: 2%;
+}
 
+/* Time Display and Controls */
+.time-section {
+    flex-direction: row;
+    align-items: center;
+    width: 30%; /* Set a fixed width for the entire time section */
+    justify-content: center; /* Center contents within section */
 }
 
 .time-display {
     font-size: 20px;
     color: rgb(220, 220, 220);
+    margin-right: 10px;
+    width: 180px; /* Set a fixed width for the time display */
+    -unity-text-align: middle-left; /* Align text to the left */
+}
+
+.time-controls {
+    flex-direction: row;
+    align-items: center;
+    width: 120px; /* Fixed width for controls container */
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.time-control-button {
+    width: 36px;
+    height: 36px;
+    background-color: rgb(50, 50, 50);
+    border-radius: 4px;
+    margin-left: 4px;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: rgb(200, 200, 200);
+}
+
+.time-control-button:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.time-control-button:active {
+    background-color: rgb(90, 90, 90);
+}
+
+.active-time-control {
+    background-color: rgb(100, 100, 100);
+    border-color: rgb(255, 215, 0);
+    border-width: 2px;
+    color: rgb(255, 215, 0);
 }
 
 .resources {
@@ -34,6 +78,7 @@
 .resource {
     font-size: 18px;
     color: rgb(220, 220, 220);
+    margin-left: 10px;
 }
 
 /* Main Content Area */

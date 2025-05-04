@@ -6,6 +6,7 @@ public class UIManager : Singleton<UIManager>
 {
     //GameManager Reference
     private GameManager gameManager;
+    private TimeManager timeManager;
     
     private UIDocument uiDocument;
     private VisualElement root;
@@ -17,6 +18,12 @@ public class UIManager : Singleton<UIManager>
     private Label woodLabel;
     private Label ironLabel;
     private Label magicCrystalsLabel;
+    
+    // Time control buttons
+    private VisualElement timeControlContainer;
+    private Button pauseButton;
+    private Button resumeButton;
+    private Button fastForwardButton;
     
     // Main panel elements
     private VisualElement mainPanel;
@@ -44,6 +51,7 @@ public class UIManager : Singleton<UIManager>
     protected override void OnAwake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        timeManager = FindFirstObjectByType<TimeManager>();
         uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
         
@@ -76,6 +84,20 @@ public class UIManager : Singleton<UIManager>
         woodLabel = root.Q<Label>("wood");
         ironLabel = root.Q<Label>("iron");
         magicCrystalsLabel = root.Q<Label>("magic-crystals");
+        
+        // Get time control elements
+        timeControlContainer = root.Q<VisualElement>("time-controls");
+        pauseButton = root.Q<Button>("pause-button");
+        resumeButton = root.Q<Button>("resume-button");
+        fastForwardButton = root.Q<Button>("fast-forward-button");
+        
+        // Set up time control event handlers
+        if (pauseButton != null) pauseButton.clicked += () => timeManager.PauseTime();
+        if (resumeButton != null) resumeButton.clicked += () => timeManager.ResumeTime();
+        if (fastForwardButton != null) fastForwardButton.clicked += () => timeManager.FastForwardTime();
+        
+        // Initial button states
+        UpdateTimeControlUI(1f); // Default to normal speed
     }
 
     private void GetMainPanelElements()
@@ -228,6 +250,29 @@ public class UIManager : Singleton<UIManager>
     public void UpdateTimeDisplay(string time)
     {
         timeDisplayLabel.text = time;
+    }
+
+    // Update the time control UI based on the current time scale
+    public void UpdateTimeControlUI(float timeScale)
+    {
+        if (pauseButton == null || resumeButton == null || fastForwardButton == null) return;
+        
+        // Set button states based on current time scale
+        pauseButton.SetEnabled(timeScale > 0f); // Can only pause if not already paused
+        resumeButton.SetEnabled(timeScale != 1f); // Can only resume if not at normal speed
+        fastForwardButton.SetEnabled(timeScale != 10f); // Can only fast forward if not already fast forwarding
+        
+        // Add visual indication of active button
+        pauseButton.RemoveFromClassList("active-time-control");
+        resumeButton.RemoveFromClassList("active-time-control");
+        fastForwardButton.RemoveFromClassList("active-time-control");
+        
+        if (timeScale == 0f)
+            pauseButton.AddToClassList("active-time-control");
+        else if (timeScale == 1f)
+            resumeButton.AddToClassList("active-time-control");
+        else if (timeScale == 10f)
+            fastForwardButton.AddToClassList("active-time-control");
     }
 
     public void UpdateResources(int gold, int wood, int iron, int magicCrystals)
