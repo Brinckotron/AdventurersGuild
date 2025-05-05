@@ -1,7 +1,6 @@
 .pause-menu-root {
     align-items: center;
     width: 100%;
-    margin-top: 32px;
 }
 
 .pause-title {

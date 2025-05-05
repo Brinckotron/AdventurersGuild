@@ -6,8 +6,6 @@ public class UIManager : Singleton<UIManager>
 {
     //GameManager Reference
     private GameManager gameManager;
-    private TimeManager timeManager;
-    
     private UIDocument uiDocument;
     private VisualElement root;
     
@@ -47,11 +45,16 @@ public class UIManager : Singleton<UIManager>
     
     // Card factory
     private AdventurerCardFactory cardFactory;
+    
+    // Pause Menu elements
+    [SerializeField] private UIDocument pauseMenu;
+    private VisualElement pauseRoot;
+    private Button pauseSettingsTab, pauseTutorialTab, pauseSaveLoadTab, pauseQuitTab;
+    private VisualElement pausePanelContent;
 
     protected override void OnAwake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-        timeManager = FindFirstObjectByType<TimeManager>();
         uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
         
@@ -92,9 +95,9 @@ public class UIManager : Singleton<UIManager>
         fastForwardButton = root.Q<Button>("fast-forward-button");
         
         // Set up time control event handlers
-        if (pauseButton != null) pauseButton.clicked += () => timeManager.PauseTime();
-        if (resumeButton != null) resumeButton.clicked += () => timeManager.ResumeTime();
-        if (fastForwardButton != null) fastForwardButton.clicked += () => timeManager.FastForwardTime();
+        if (pauseButton != null) pauseButton.clicked += () => gameManager.GameTimeScaleChange("pause");
+        if (resumeButton != null) resumeButton.clicked += () => gameManager.GameTimeScaleChange("resume");
+        if (fastForwardButton != null) fastForwardButton.clicked += () => gameManager.GameTimeScaleChange("fast-forward");
         
         // Initial button states
         UpdateTimeControlUI(1f); // Default to normal speed
@@ -291,4 +294,53 @@ public class UIManager : Singleton<UIManager>
             LoadAdventurersTab();
         }
     }
+
+    #region PauseMenu
+
+    // Methods for the Pause Menu
+
+    public void ShowPauseMenu(bool show)
+    {
+        pauseMenu.gameObject.SetActive(show);
+        if (show) InitializePauseMenu();
+    }
+
+    private void InitializePauseMenu()
+    {
+        // Get References for PauseMenu
+        pauseRoot = pauseMenu.rootVisualElement;
+
+        pauseSettingsTab = pauseRoot.Q<Button>("settings-tab");
+        pauseTutorialTab = pauseRoot.Q<Button>("tutorial-tab");
+        pauseSaveLoadTab = pauseRoot.Q<Button>("saveload-tab");
+        pauseQuitTab = pauseRoot.Q<Button>("quit-tab");
+        pausePanelContent = pauseRoot.Q<VisualElement>("pause-content");
+
+        // event handlers for buttons
+        pauseSettingsTab.clicked += () => SelectPauseTab(pauseSettingsTab);
+        pauseTutorialTab.clicked += () => SelectPauseTab(pauseTutorialTab);
+        pauseSaveLoadTab.clicked += () => SelectPauseTab(pauseSaveLoadTab);
+        pauseQuitTab.clicked += () => SelectPauseTab(pauseQuitTab);
+        
+        // Default to settings tab
+        SelectPauseTab(pauseSettingsTab);
+    }
+
+    private void SelectPauseTab(Button selected)
+    {
+        foreach (var tab in new[] { pauseSettingsTab, pauseTutorialTab, pauseSaveLoadTab, pauseQuitTab })
+            tab.RemoveFromClassList("selected");
+        selected.AddToClassList("selected");
+
+        // You can update pauseContent here based on the selected tab
+        pausePanelContent.Clear();
+        Label contentLabel = new Label($"Content for {selected.text}");
+        contentLabel.style.unityTextAlign = TextAnchor.MiddleCenter;
+        contentLabel.style.fontSize = 24;
+        pausePanelContent.Add(contentLabel);
+    }
+    
+
+    #endregion
+    
 }

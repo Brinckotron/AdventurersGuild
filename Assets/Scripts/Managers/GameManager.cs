@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     
     //GameState variables
     private string activeMainTab = "";
+    private bool gamePauseMenuOpen = false;
+    public bool GamePauseMenuOpen { get => gamePauseMenuOpen;}
     
     // Game resources
     private int gold = 1000;
@@ -127,14 +129,40 @@ public class GameManager : Singleton<GameManager>
     
     // Public Methods to be called from TimeManager
 
-    public void UpdateTime()
+    public void UIUpdateTime()
     {
         uiManager.UpdateTimeDisplay($"Day {timeManager.CurrentDay}, {timeManager.CurrentHour:00}:{timeManager.CurrentMinutes:00}");
     }
 
-    public void UpdateTimeScale()
+    public void UIUpdateTimeControls()
     {
         uiManager.UpdateTimeControlUI(timeManager.TimeScale);
+    }
+
+    public void GameTimeScaleChange(string timeScale)
+    {
+            switch (timeScale)
+            {
+                case "pause":
+                    timeManager.PauseTime();
+                    break;
+                case "resume":
+                    timeManager.ResumeTime();
+                    break;
+                case "fast-forward":
+                    timeManager.FastForwardTime();
+                    break;
+            }
+
+            UIUpdateTimeControls();
+    }
+
+    public void ShowPauseMenu()
+    {
+        gamePauseMenuOpen = !gamePauseMenuOpen;
+        uiManager.ShowPauseMenu(gamePauseMenuOpen);
+        string timeScale = gamePauseMenuOpen ? "pause" : "resume";
+        GameTimeScaleChange(timeScale);
     }
 }
     

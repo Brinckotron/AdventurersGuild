@@ -1,8 +1,6 @@
 <UXML xmlns="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/PauseMenu.uss?fileID=7433441132597879392&amp;guid=48e7c2bb73d4cf747a29a868447eb954&amp;type=3#PauseMenu" />
-    <VisualElement class="pause-menu-root">
-        <Label text="PAUSE MENU" class="pause-title" />
-        <Label text="No BG pour le pause Menu" class="pause-desc" />
+    <VisualElement name="VisualElement" class="pause-menu-root" style="height: 1048px; flex-grow: 1; justify-content: center;">
         <VisualElement class="pause-tabs">
             <Button name="settings-tab" text="Setting" class="pause-tab selected" />
             <Button name="tutorial-tab" text="Tuto/Manual" class="pause-tab" />

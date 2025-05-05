@@ -6,14 +6,10 @@ public class InputHandler : Singleton<InputHandler>
 {
     private GameManager gameManager;
     private Camera mainCamera;
-    private TimeManager timeManager;
-    private bool gamePaused;
-    [SerializeField] private GameObject pauseMenu;
 
     protected override void OnAwake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-        timeManager = FindFirstObjectByType<TimeManager>();
         mainCamera = Camera.main;
     }
 
@@ -28,6 +24,7 @@ public class InputHandler : Singleton<InputHandler>
         if (Mouse.current.position.ReadValue().x < Screen.width * 0.75f &&
             Mouse.current.position.ReadValue().y < Screen.height * 0.861f &&
             Mouse.current.position.ReadValue().y > Screen.height * 0.176f &&
+            !gameManager.GamePauseMenuOpen &&
             gameManager.ActiveMainTab == "guild")
         {
             Debug.Log("Lol");
@@ -37,21 +34,7 @@ public class InputHandler : Singleton<InputHandler>
     public void OnPause(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-
-        if (!gamePaused)
-        {
-            gamePaused = true;
-            timeManager.PauseTime();
-            pauseMenu.SetActive(gamePaused);
-            Debug.Log("Pause Game");
-        }
-        else
-        {
-            gamePaused = false;
-            pauseMenu.SetActive(gamePaused);
-            timeManager.ResumeTime();
-            Debug.Log("Resume Game");
-        }
+        gameManager.ShowPauseMenu();
     }
     
    

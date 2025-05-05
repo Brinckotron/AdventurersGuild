@@ -64,6 +64,7 @@ public class TimeManager : Singleton<TimeManager>
     {
         // Increment minutes
         currentMinutes++;
+        OnMinuteChanged();
         
         // Check if we need to advance to the next hour
         if (currentMinutes >= 60)
@@ -92,28 +93,31 @@ public class TimeManager : Singleton<TimeManager>
         // For example, adventurers returning, quests completing, etc.
     }
     
+    private void OnMinuteChanged()
+    {
+        // This can be used to trigger events at minute changes
+        // For example, adventurers returning, quests completing, etc.
+    }
+    
     private void UpdateTimeDisplay()
     {
-            gameManager.UpdateTime();
+            gameManager.UIUpdateTime();
     }
     
     // Public methods for controlling time
     public void PauseTime()
     {
         timeScale = 0f;
-        gameManager.UpdateTimeScale();
     }
     
     public void ResumeTime()
     {
         timeScale = 1f;
-        gameManager.UpdateTimeScale();
     }
     
     public void FastForwardTime()
     {
         timeScale = 10f;
-        gameManager.UpdateTimeScale();
     }
     
     // Method to set a specific time (for debugging or events)
