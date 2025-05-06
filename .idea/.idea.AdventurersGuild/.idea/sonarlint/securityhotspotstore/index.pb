@@ -3,8 +3,6 @@ I
 Assets/UI/MainLayout.uxml,3\0\3019ba8527e987b85046116da3e79c7b593f22ac
 H
 Assets/UI/MainLayout.uss,2\7\270350eb8eb0fb5d08e07865e0960782c8c8cd9d
-F
-Assets/Scripts/Test.cs,0\a\0aba8e4f3215b939c1dbf711351f482c5f08d9cd
 T
 $Assets/Scripts/Input/InputHandler.cs,9\6\96c23538becb619ca83222cf3a48bdc1b32a9f0d
 N
