@@ -11,3 +11,15 @@ V
 &Assets/Scripts/Managers/TimeManager.cs,3\2\32b367775d0283fd55110cbb96da28c8f7decd67
 G
 Assets/UI/PauseMenu.uss,1\0\105d0a78a292a614026b0c46f5a29666aa999cd6
+V
+&Assets/Scripts/Managers/GameManager.cs,a\8\a83f2db293a36f8073cf20ff67409a2e188f7359
+Q
+!Assets/Scripts/Core/Adventurer.cs,d\b\db2e05d691e4e757c368de73f88f23edb4bd51bf
+Z
+*Assets/Scripts/UI/AdventurerCardFactory.cs,1\8\1840e35a0ae5a28bbd123a1a7fe914768d41f764
+W
+'Assets/Scripts/Core/SelectableObject.cs,a\b\ab5230a7769f3174b8acec36e3e060da7ad62e8f
+[
++Assets/Scripts/Managers/SelectionManager.cs,f\a\fab004414a7ff516c694113f8a0a7fa9dab9c2d9
+^
+.Assets/Scripts/Interfaces/ISelectableObject.cs,c\e\cecb24d9af5ffcd2961b8f682b8b64e86f4bfeee
