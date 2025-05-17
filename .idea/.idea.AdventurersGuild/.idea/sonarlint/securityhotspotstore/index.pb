@@ -19,7 +19,5 @@ Z
 *Assets/Scripts/UI/AdventurerCardFactory.cs,1\8\1840e35a0ae5a28bbd123a1a7fe914768d41f764
 [
 +Assets/Scripts/Managers/SelectionManager.cs,f\a\fab004414a7ff516c694113f8a0a7fa9dab9c2d9
-W
-'Assets/Scripts/Core/SelectableObject.cs,a\b\ab5230a7769f3174b8acec36e3e060da7ad62e8f
 ^
 .Assets/Scripts/Interfaces/ISelectableObject.cs,c\e\cecb24d9af5ffcd2961b8f682b8b64e86f4bfeee

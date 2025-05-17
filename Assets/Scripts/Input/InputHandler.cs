@@ -6,13 +6,14 @@ public class InputHandler : Singleton<InputHandler>
 {
     private GameManager gameManager;
     private Camera mainCamera;
+    private SelectionManager selectionManager;
 
     protected override void OnAwake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         mainCamera = Camera.main;
+        selectionManager = SelectionManager.Instance;
     }
-
 
     public void OnClick(InputAction.CallbackContext context)
     {
@@ -27,7 +28,18 @@ public class InputHandler : Singleton<InputHandler>
             !gameManager.GamePauseMenuOpen &&
             gameManager.ActiveMainTab == "guild")
         {
-            Debug.Log("Lol");
+            // Check if we clicked on a selectable object
+            var selectable = rayHit.collider.GetComponent<ISelectableObject>();
+            if (selectable != null)
+            {
+                //Regular selection
+                selectionManager.SelectObject(selectable);
+            }
+            else
+            {
+                // If we clicked on nothing selectable, clear the selection
+                selectionManager.ClearSelection();
+            }
         }
     }
 
@@ -36,6 +48,10 @@ public class InputHandler : Singleton<InputHandler>
         if (!context.started) return;
         gameManager.ShowPauseMenu();
     }
-    
-   
+
+    public void OnToggleMultiSelect(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        selectionManager.ToggleMultiSelect(!selectionManager.IsMultiSelectEnabled);
+    }
 }
